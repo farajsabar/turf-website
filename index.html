@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.360</title>
+    <link rel="icon" type="image/png" href="Turff/img/mr360logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://codepen.io/kathykato/pen/57f0b5b76e6aa7e4917e08b81d378d7b.scss">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-brands/css/uicons-brands.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
+    <link rel="stylesheet" type="text/css" href="/Turff/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/Turff/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/Turff/css/bootstrap.min.css">
+     <link rel="icon" type="image/png" href="img/mr360logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://codepen.io/kathykato/pen/57f0b5b76e6aa7e4917e08b81d378d7b.scss">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-brands/css/uicons-brands.css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="/Turff/style.css" rel="stylesheet">
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #172027;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader-container {
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .loader-gif {
+            width: 180px;
+            height: auto;
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.25rem;
+        }
+        
+        .progress {
+            width: 200px;
+            height: 3px;
+            margin-top: 25px;
+            background-color: #172027;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background-color: #8e8d8d;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader-container">
+            <img src="https://webstrot.com/html/sporteyz/assets/img/loader.gif" class="loader-gif" alt="Loading football animation">
+            <!-- <p class="loading-text">Preparing the Pitch...</p> -->
+            <div class="progress">
+                <div class="progress-bar" id="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Your page content (hidden during loading) -->
+    <div class="container-fluid p-0" id="main-content" style="display:none;">
+    <!--Cursor-->
+    <div class="cursor d-none d-sm-none d-md-block d-lg-block"></div>      
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        /* Header and Navigation with Glass Effect */
+        header {
+            backdrop-filter: blur(10px); /* This creates the glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        header.scrolled {
+            /* background: rgba(26, 44, 95, 0.95); */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* max-width: 1200px; */
+            margin: 0 10px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            top: 10px;
+            position: relative;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: -2.9rem;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: red;
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: red;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+        }
+
+        .hero .content {
+            position: relative;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+            margin-top: 60px;
+        }
+
+        .hero .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .book-now-btn {
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            top: 0px;
+        }
+
+        .book-now-btn:hover {
+            background: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(71, 71, 70, 0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: #ff7b33;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 2;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Styles */
+
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                flex-direction: column;
+                clip-path: circle(0px at 90% -10%);
+                -webkit-clip-path: circle(0px at 90% -10%);
+                background: #000000;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: all 0.8s ease-out;
+                top: 70px;
+                left: 0;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1500px at 90% -10%);
+                -webkit-clip-path: circle(1500px at 90% -10%);
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .content h1 {
+                font-size: 2.8rem;
+            }
+              .book-now-btn {
+                margin-left: 0;
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                flex-direction: column;
+                clip-path: circle(0px at 90% -10%);
+                -webkit-clip-path: circle(0px at 90% -10%);
+                background: #000000;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: all 0.8s ease-out;
+                top: 70px;
+                left: 0;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1500px at 90% -10%);
+                -webkit-clip-path: circle(1500px at 90% -10%);
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .content h1 {
+                font-size: 2.8rem;
+            }
+              .book-now-btn {
+                margin-left: 0;
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content p {
+                font-size: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+            }
+            
+             .book-now-btn {
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Transparent Blur Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+              <img src="/Turff/img/mr360logo.png" alt="">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-list"></i> Category</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#"><i class="fas fa-phone"></i> Contact Us</a></li>
+                <li><a href="#" class="book-now-btn"><i class="fas fa-ticket-alt me-1 pt-1"></i>  Book Now</a></li>
+
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Slide 1 -->
+        <div class="slide active" style="background-image: url('/Turff/img/close-up-athlete-playing-soccer.jpg'); object-fit: cover; width: 100%; height: 100%;">
+            <div class="content">
+                <h1>Experience The Thrill</h1>
+                <p>Join thousands of athletes pushing their limits and achieving greatness in every game</p>
+                <a href="#" class="btn">Watch Live</a>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('/Turff/img/football.jpg'); object-fit: cover; width: 100%; height: 100%;">
+            <div class="content">
+                <h1>Train Like A Champion</h1>
+                <p>Access professional training programs and elevate your performance to the next level</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="slide" style="background-image: url('/Turff/img/turf_video.jpg'); object-fit: cover; width: 100%; height: 100%;">
+            <div class="content">
+                <h1>Join The Community</h1>
+                <p>Connect with sports enthusiasts from around the world and share your passion</p>
+                <a href="#" class="btn">Sign Up Now</a>
+            </div>
+        </div>
+        
+        <!-- Slide 4 -->
+        <div class="slide" style="background-image: url('/Turff/img/soccer-players-action-professional-stadium.jpg'); object-fit: cover; width: 100%; height: 100%;">
+            <div class="content">
+                <h1>Latest Sports Gear</h1>
+                <p>Discover the newest equipment and apparel designed for peak performance</p>
+                <a href="#" class="btn">Shop Now</a>
+            </div>
+        </div>
+        
+        <div class="indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+            <div class="indicator" data-slide="3"></div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const header = document.getElementById('header');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Slideshow functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            const slideInterval = 3000; // 3 seconds
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Remove active class from all slides and indicators
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                // Add active class to current slide and indicator
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                showSlide((currentSlide + 1) % slides.length);
+            }
+            
+            // Set up automatic slideshow
+            let autoSlide = setInterval(nextSlide, slideInterval);
+            
+            // Add click events to indicators
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                    
+                    // Reset the automatic slideshow timer
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(nextSlide, slideInterval);
+                });
+            });
+            
+            // Pause slideshow when hovering over slides
+            const hero = document.querySelector('.hero');
+            hero.addEventListener('mouseenter', () => {
+                clearInterval(autoSlide);
+            });
+            
+            // Resume slideshow when mouse leaves
+            hero.addEventListener('mouseleave', () => {
+                autoSlide = setInterval(nextSlide, slideInterval);
+            });
+        });
+    </script>
+
+     <div class="rts-gallery-section">
+        <div class="container">
+            <div class="gallery-area">
+                <div class="gallery-item text-center">
+                    <a href="#0" class="gallery-picture"><img src="/Turff/img/img8.jpg" alt=""></a>
+                    <a href="#0" class="gallery-picture1"><img src="/Turff/img/img8-small.jpg" alt=""></a>
+                    <div class="contents-wrapper">
+                        <div class="contents text-start">
+                            <div class="d-block">
+                                <p class="tag">FOOTBALL</p>
+                                <a href="blog-details.html" class="gallery-title">THE WORLD CUP – WHAT TO EXPECT FROM</a>
+                            </div>
+                            <div class="author-info">
+                                <div class="content">
+                                    <a href="blog-details.html" class="read-more">READ MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item text-center active mid">
+                    <a href="#0" class="gallery-picture"><img src="/Turff/img/img9.jpg" alt=""></a>
+                    <a href="#0" class="gallery-picture1"><img src="/Turff/img/img9-small.jpg" alt=""></a>
+                    <div class="contents-wrapper">
+                        <div class="contents text-start">
+                            <div class="d-block">
+                                <p class="tag">FOOTBALL</p>
+                                <a href="blog-details.html" class="gallery-title">THE WORLD CUP – WHAT TO EXPECT FROM</a>
+                            </div>
+                            <div class="author-info">
+                                <div class="content">
+                                    <a href="blog-details.html" class="read-more">READ MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item text-center">
+                    <a href="#0" class="gallery-picture"><img src="/Turff/img/img10.jpg" alt=""></a>
+                    <a href="#0" class="gallery-picture1"><img src="/Turff/img/img10-small.jpg" alt=""></a>
+                    <div class="contents-wrapper">
+                        <div class="contents text-start">
+                            <div class="d-block">
+                                <p class="tag">FOOTBALL</p>
+                                <a href="blog-details.html" class="gallery-title">THE WORLD CUP – WHAT TO EXPECT FROM</a>
+                            </div>
+                            <div class="author-info">
+                                <div class="content">
+                                    <a href="blog-details.html" class="read-more">READ MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid booking_section" style="margin-top: 50px;">
+       <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+        <div class="booking-panel">
+            <h1>City Sports Arena</h1>
+            <p class="description">Premium quality turf with professional maintenance. Perfect for football, rugby and other field sports.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-ruler-combined"></i>
+                    <span>100m x 64m</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>11v11</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-parking"></i>
+                    <span>Parking</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shower"></i>
+                    <span>Shower</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-door-open"></i>
+                    <span>Changing Room</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Floodlights</span>
+                </div>
+            </div>
+            
+            <div class="price">$80 / hour</div>
+            
+            <div class="date">Today, June 10</div>
+            
+            <div class="time-slots">
+                <div class="time-slot">08:00 AM</div>
+                <div class="time-slot">09:00 AM</div>
+                <div class="time-slot">10:00 AM</div>
+                <div class="time-slot">11:00 AM</div>
+                <div class="time-slot">12:00 PM</div>
+                <div class="time-slot">01:00 PM</div>
+                <div class="time-slot">02:00 PM</div>
+                <div class="time-slot">03:00 PM</div>
+                <div class="time-slot">04:00 PM</div>
+                <div class="time-slot">05:00 PM</div>
+                <div class="time-slot">06:00 PM</div>
+                <div class="time-slot">07:00 PM</div>
+                <div class="time-slot">08:00 PM</div>
+                <div class="time-slot">09:00 PM</div>
+                <div class="time-slot">10:00 PM</div>
+                <div class="time-slot">11:00 PM</div>
+                <div class="time-slot">12:00 AM</div>
+                <div class="time-slot">01:00 AM</div>
+                <div class="time-slot">02:00 AM</div>
+                <div class="time-slot">03:00 AM</div>
+            </div>
+            
+            <button class="book-btn">Book Selected Slot</button>
+        </div>
+        </div>
+        <div class="col-lg-6">
+        <div class="match-panel">
+            <h2>Next Match Starts In</h2>
+            
+            <div class="countdown">
+                <div class="countdown-title">Community League - Finals</div>
+                <div class="timer">
+                    <div class="time-unit">
+                        <div class="time-value" id="hours">02</div>
+                        <div class="time-label">Hours</div>
+                    </div>
+                    <div class="time-unit">
+                        <div class="time-value" id="minutes">45</div>
+                        <div class="time-label">Minutes</div>
+                    </div>
+                    <div class="time-unit">
+                        <div class="time-value" id="seconds">18</div>
+                        <div class="time-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="match-teams">
+                    <div class="team">
+                        <div class="team-logo">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <div class="team-name">Red Dragons</div>
+                    </div>
+                    
+                    <div class="vs">VS</div>
+                    
+                    <div class="team">
+                        <div class="team-logo">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="team-name">Blue Lightning</div>
+                    </div>
+                </div>
+                
+                <div class="match-info">
+                    <div class="info-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Championship Final - Community League</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Today, June 10 at 7:00 PM</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>City Sports Arena - Field 1</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-whistle"></i>
+                        <span>Referee: Michael Johnson</span>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 25px;">Upcoming Matches</h2>
+                
+                <div class="match-info">
+                    <div class="info-item">
+                        <i class="far fa-futbol"></i>
+                        <span>8:30 PM - United FC vs. City Strikers</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="far fa-futbol"></i>
+                        <span>10:00 PM - Night Hawks vs. Thunder FC</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="container-fluid video-section">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="turf-video-section">
+                <div class="video-section-inner text-center">
+                <div class="play-video">
+                    <a class="popup-video" href="https://www.youtube.com/watch?v=zAQvAUc-dLU">
+                    <i class="fas fa-play"></i></a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="container-fluid about-section" style="background-color: black; color: whitesmoke; margin-top: 40px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="slider">
+                            <img src="img/soccor.jpg" alt="" class="img-fluid" id="slider-image">
+                            <img src="img/soccor.jpg" alt="" class="img-fluid" id="slider-image1">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 offset-lg-1">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="total">
+                                    <div class="heading">
+                                        <h2>About Us</h2>
+                                    </div>
+                                    <div class="content">
+                                        <p>Artificial Turf 360 Ground offers a durable, low-maintenance, and eco-friendly alternative to natural grass. Perfect for sports fields, playgrounds, and landscaping, our turf provides a lush, green appearance year-round. Enjoy consistent performance, excellent drainage, and a safe surface for all activities. Transform your outdoor space with Artificial Turf 360 Ground—where quality meets innovation.</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                    <div class="features">
+                                        <ul>
+                                            <li>Professional 360° Turf Facility</li>
+                                            <li>Day & Night Game Booking</li>
+                                            <li>Cricket, Football & Box Cricket</li>
+                                            <li>Weekly Tournaments & Leagues</li>
+                                            <li>Advanced Lighting & Drainage</li>
+                                        </ul>
+                                    </div>
+                                    <div class="features d-none d-md-block">
+                                        <ul>
+                                            <li>Professional 360° Turf Facility</li>
+                                            <li>Day & Night Game Booking</li>
+                                            <li>Cricket, Football & Box Cricket</li>
+                                            <li>Weekly Tournaments & Leagues</li>
+                                            <li>Advanced Lighting & Drainage</li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <button class="booknow">
+                                            <a href="#">Book Now</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid gallery_section p-0 mt-5 mb-5">
+        <div class="container">
+    <style>
+    .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    gap: 0px;
+    }
+    .gallery > div {
+    flex: 1 1 20%;
+    padding: 0px;
+    margin: 0px;
+    }
+    .gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    }
+    </style>
+    <div class="gallery">
+    <div><img src="/Turff/img/cricket.jpg" alt></div>
+    <div><img src="/Turff/img/football.jpg" alt></div>
+    <div><img src="/Turff/img/picleball.jpeg" alt></div>
+    <div><img src="/Turff/img/football.jpg" alt></div>
+    <div><img src="/Turff/img/cricket.jpg" alt></div>
+    </div>
+    <div class="gallery">
+    <div><img src="/Turff/img/football.jpg" alt></div>
+    <div><img src="/Turff/img/picleball.jpeg" alt></div>
+    <div><img src="/Turff/img/cricket.jpg" alt></div>
+    <div><img src="/Turff/img/picleball.jpeg" alt></div>
+    <div><img src="/Turff/img/football.jpg" alt></div>
+    </div>
+        </div>
+        </div>
+
+        <div class="container-fluid map-section mt-5">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12 p-0">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d656.5937141764147!2d78.75710353518257!3d10.734088989804023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa8c8641563f01%3A0xa28e9d5ab961c5d2!2sRRK%20CONSTRUCTIONS!5e0!3m2!1sen!2sin!4v1756273648204!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="container-fluid footer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                        <div class="footer-left">
+                            <div class="footer-logo">
+                                <img src="/Turff/img/mr360logo.png" style="background-color: #000000;" alt="" class="footer">
+                            </div>
+                            <div class="footer-text">
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati voluptas amet iste delectus voluptates, enim animi porro exercitationem. Dolor, at?</p>
+                            </div>
+                            <div>
+                                <button class="booknow">
+                                    <a href="#">Book Now</a>
+                                </button>
+                            </div>
+                            <div class="footer-social">
+                            <a href="https://wa.me/919876543210?text=Hello%20Sakthi" class="whatsapp"><i class="fi fi-brands-whatsapp whatsapp"></i></a>
+                            <a href="#" class="instagram"><i class="fi fi-brands-instagram instagram"></i></a>
+                            <a href="#" class="facebook"><i class="fi fi-brands-facebook facebook"></i></a>
+                            <a href="#" class="twitter"><i class="fi fi-brands-twitter twitter"></i></a>
+                            </div>
+                            <!-- <style>
+                            .footer-social a {
+                            color: #8e8d8d;
+                            font-size: 2rem;
+                            margin-right: 12px;
+                            transition: color 0.3s;
+                            text-decoration: none;
+                            }
+                            .footer-social a.whatsapp:hover { color: #25D366; }
+                            .footer-social a.instagram:hover { color: #E4405F; }
+                            .footer-social a.facebook:hover { color: #1877F3; }
+                            .footer-social a.twitter:hover { color: #1DA1F2; }
+                            </style> -->
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                        <div class="menu-section">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-menu">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                    <div class="contact-section">
+                            <div class="title">
+                                <h3>Contact Us</h3>
+                            </div>
+                            <div class="contact-info">
+                                <p><strong>Address:</strong> 123 Main St, City, Country</p>
+                                <p><strong>Phone:</strong> +123 456 7890</p>
+                                <p><strong>Email:</strong>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid last-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright mt-2 mb-2">
+                            <p>© 2025 Mr.360. All rights reserved | <a href="https://levlox.tech/">Designed by Levlox</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <a href="https://wa.me/9962945293" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- WhatsApp Float Button -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <script src="Turff/script.js"></script>
+
+        <script>
+            (function ($) {
+        "use strict";
+
+        $('.gallery-area .gallery-item').hover(function () {
+            $('.gallery-area .gallery-item.active').removeClass('active');
+            $(this).addClass('active');
+        });
+
+    })(jQuery);
+        </script>
+        <script>
+            (function ($) {
+                "use strict";
+            $(document).ready(function () {
+                $('.gallery-area .gallery-item').hover(function () {
+                    $('.gallery-area .gallery-item.active').removeClass('active');
+                    $(this).addClass('active');
+                });
+            });
+            })(jQuery);
+        </script>
+
+    <script>
+            // Simulate loading progress
+            function simulateLoading() {
+                let progress = 0;
+                const bar = document.getElementById('loading-bar');
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress > 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(hideLoader, 200);
+                    }
+                    bar.style.width = progress + '%';
+                }, 200);
+            }
+            
+            function hideLoader() {
+                const loader = document.querySelector('.loading-screen');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 200);
+            }
+            
+            // Start loading simulation when page loads
+            window.addEventListener('load', simulateLoading);
+    </script>
+
+    <script>
+        new Vue({
+    el: '#app',
+    data() {
+        return {
+        burgerVisibility: false
+        }
+    },
+    methods: {
+        changeVisibility() {
+        this.burgerVisibility = !this.burgerVisibility;
+        }
+    }
+    })
+    </script>
+
+    <script>
+    /*
+    inspiration
+    https://dribbble.com/shots/4684682-Aquatic-Animals
+    */
+
+    var swiper = new Swiper(".swiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 3,
+        slideShadows: true
+    },
+    keyboard: {
+        enabled: true
+    },
+    mousewheel: {
+        thresholdDelta: 70
+    },
+    loop: true,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    },
+    breakpoints: {
+        640: {
+        slidesPerView: 2
+        },
+        768: {
+        slidesPerView: 1
+        },
+        1024: {
+        slidesPerView: 2
+        },
+        1560: {
+        slidesPerView: 3
+        }
+    }
+    });
+    </script>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const timeSlots = document.querySelectorAll('.time-slot');
+                
+                timeSlots.forEach(slot => {
+                    slot.addEventListener('click', function() {
+                        // Remove selected class from all slots
+                        timeSlots.forEach(s => s.classList.remove('selected'));
+                        
+                        // Add selected class to clicked slot
+                        this.classList.add('selected');
+                    });
+                });
+                
+                // Simulate clicking the first time slot
+                if (timeSlots.length > 0) {
+                    timeSlots[0].click();
+                }
+                
+                // Add booking functionality
+                const bookBtn = document.querySelector('.book-btn');
+                bookBtn.addEventListener('click', function() {
+                    const selectedSlot = document.querySelector('.time-slot.selected');
+                    if (selectedSlot) {
+                        alert(`You have booked the time slot at ${selectedSlot.textContent}`);
+                    } else {
+                        alert('Please select a time slot to book');
+                    }
+                });
+                
+                // Countdown timer functionality
+                function updateCountdown() {
+                    const hoursElem = document.getElementById('hours');
+                    const minutesElem = document.getElementById('minutes');
+                    const secondsElem = document.getElementById('seconds');
+                    
+                    let hours = parseInt(hoursElem.textContent);
+                    let minutes = parseInt(minutesElem.textContent);
+                    let seconds = parseInt(secondsElem.textContent);
+                    
+                    seconds--;
+                    
+                    if (seconds < 0) {
+                        seconds = 59;
+                        minutes--;
+                        
+                        if (minutes < 0) {
+                            minutes = 59;
+                            hours--;
+                            
+                            if (hours < 0) {
+                                // Countdown finished
+                                hours = 0;
+                                minutes = 0;
+                                seconds = 0;
+                                return;
+                            }
+                        }
+                    }
+                    
+                    hoursElem.textContent = hours.toString().padStart(2, '0');
+                    minutesElem.textContent = minutes.toString().padStart(2, '0');
+                    secondsElem.textContent = seconds.toString().padStart(2, '0');
+                }
+                
+                // Update countdown every second
+                setInterval(updateCountdown, 1000);
+            });
+    </script>
+
+    <script>
+        
+            // WhatsApp button scroll functionality
+            $(window).on('scroll', function() {
+                if ($(this).scrollTop() > 200) {
+                    $('.whatsapp-float').addClass('show');
+                } else {
+                    $('.whatsapp-float').removeClass('show');
+                }
+            });
+    </script>
+    </body>
+    </html>

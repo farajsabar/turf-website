@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery with Hover Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .image-wrapper {
+            flex: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .image-wrapper:hover::before {
+            opacity: 1;
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: all 0.4s ease;
+        }
+        
+        .image-wrapper .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .image-wrapper:hover .caption {
+            transform: translateY(0);
+        }
+        
+        .center {
+            flex: 1.5;
+        }
+        
+        .gallery:hover .image-wrapper:not(:hover) {
+            flex: 0.8;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                flex-direction: column;
+            }
+            
+            .image-wrapper {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .center {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Gallery with Hover Effect</h1>
+        
+        <div class="gallery">
+            <div class="image-wrapper">
+                <img src="/img/soccor.jpg" alt="Mountain Landscape">
+                <div class="caption">
+                    <h3>Mountain View</h3>
+                    <p>Beautiful mountain landscape at sunrise</p>
+                </div>
+            </div>
+            
+            <div class="image-wrapper center">
+                <img src="/img/soccor.jpg" alt="Forest Landscape">
+                <div class="caption">
+                    <h3>Forest Path</h3>
+                    <p>Serene forest path with lush greenery</p>
+                </div>
+            </div>
+            
+            <div class="image-wrapper">
+                <img src="/img/soccor.jpg" alt="Lake Landscape">
+                <div class="caption">
+                    <h3>Lake Reflection</h3>
+                    <p>Calm lake with perfect mountain reflection</p>
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
+
+    <script>
+        // Add some interactive effects with JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageWrappers = document.querySelectorAll('.image-wrapper');
+            
+            imageWrappers.forEach(wrapper => {
+                // Add click event to make the effect persistent on mobile
+                wrapper.addEventListener('click', function() {
+                    // Remove active class from all wrappers
+                    imageWrappers.forEach(w => w.classList.remove('active'));
+                    
+                    // Add active class to clicked wrapper
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

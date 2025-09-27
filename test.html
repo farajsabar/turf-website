@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hover Effect</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .image-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-box.center {
+            width: 250px;
+            height: 250px;
+        }
+
+        .image-box:hover {
+            width: 300px;
+            height: 300px;
+            z-index: 10;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-container:hover .image-box:not(:hover) {
+            width: 150px;
+            height: 150px;
+        }
+
+
+        .image-container:hover .image-box.center:not(:hover) {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="image-box">
+            <img src="/img/soccor.jpg" alt="Image 1">
+        </div>
+        <div class="image-box center">
+            <img src="/img/soccor.jpg" alt="Image 2">
+        </div>
+        <div class="image-box">
+            <img src="/img/soccor.jpg" alt="Image 3">
+        </div>
+    </div>
+
+    <script>
+        const imageBoxes = document.querySelectorAll('.image-box');
+
+        imageBoxes.forEach(box => {
+            box.addEventListener('mouseenter', () => {
+                imageBoxes.forEach(otherBox => {
+                    if (otherBox !== box) {
+                        otherBox.style.transition = 'all 0.3s ease';
+                    }
+                });
+            });
+
+            box.addEventListener('mouseleave', () => {
+                imageBoxes.forEach(otherBox => {
+                    otherBox.style.transition = 'all 0.3s ease';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

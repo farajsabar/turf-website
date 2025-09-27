@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports World | Dynamic Hero</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Header Styles with Transparent Blur Effect */
+        header {
+            background: rgba(26, 44, 95, 0.7); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* This creates the blur effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(26, 44, 95, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: #ff5c00;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin: 0 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #ff5c00;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .book-now-btn {
+            background: #ff5c00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .book-now-btn:hover {
+            background: #ff7b33;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 92, 0, 0.4);
+        }
+
+        .book-now-btn i {
+            margin-right: 8px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+        }
+
+        .content {
+            position: relative;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff5c00;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ff7b33;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 2;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                flex-direction: column;
+                clip-path: circle(0px at 90% -10%);
+                -webkit-clip-path: circle(0px at 90% -10%);
+                background: rgba(26, 44, 95, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: all 0.8s ease-out;
+                top: 0;
+                left: 0;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1500px at 90% -10%);
+                -webkit-clip-path: circle(1500px at 90% -10%);
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+
+            .book-now-btn {
+                margin-left: 0;
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content p {
+                font-size: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+            }
+            
+            header {
+                padding: 15px 20px;
+            }
+            
+            .book-now-btn {
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-basketball-ball"></i>
+                <span>SportZone</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-list"></i> Category</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#"><i class="fas fa-phone"></i> Contact Us</a></li>
+                <li><a href="#" class="book-now-btn"><i class="fas fa-ticket-alt"></i> Book Now</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Slide 1 -->
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="content">
+                <h1>Experience The Thrill</h1>
+                <p>Join thousands of athletes pushing their limits and achieving greatness in every game</p>
+                <a href="#" class="btn">Watch Live</a>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="content">
+                <h1>Train Like A Champion</h1>
+                <p>Access professional training programs and elevate your performance to the next level</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="content">
+                <h1>Join The Community</h1>
+                <p>Connect with sports enthusiasts from around the world and share your passion</p>
+                <a href="#" class="btn">Sign Up Now</a>
+            </div>
+        </div>
+        
+        <!-- Slide 4 -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556817411-31d7f5f25d84?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="content">
+                <h1>Latest Sports Gear</h1>
+                <p>Discover the newest equipment and apparel designed for peak performance</p>
+                <a href="#" class="btn">Shop Now</a>
+            </div>
+        </div>
+        
+        <div class="indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+            <div class="indicator" data-slide="3"></div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const header = document.getElementById('header');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Slideshow functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            const slideInterval = 3000; // 3 seconds
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Remove active class from all slides and indicators
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                // Add active class to current slide and indicator
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                showSlide((currentSlide + 1) % slides.length);
+            }
+            
+            // Set up automatic slideshow
+            let autoSlide = setInterval(nextSlide, slideInterval);
+            
+            // Add click events to indicators
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                    
+                    // Reset the automatic slideshow timer
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(nextSlide, slideInterval);
+                });
+            });
+            
+            // Pause slideshow when hovering over slides
+            const hero = document.querySelector('.hero');
+            hero.addEventListener('mouseenter', () => {
+                clearInterval(autoSlide);
+            });
+            
+            // Resume slideshow when mouse leaves
+            hero.addEventListener('mouseleave', () => {
+                autoSlide = setInterval(nextSlide, slideInterval);
+            });
+        });
+    </script>
+</body>
+</html>
